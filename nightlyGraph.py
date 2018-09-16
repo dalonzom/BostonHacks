@@ -7,7 +7,7 @@ def map(x, in_min, in_max, out_min, out_max):
 
 
 
-directory = '/Users/Marissa/Documents/BostonHacks/output.txt'
+directory = '/home/linaro/BostonHacks/night_data_1.txt' 
 
 
 app = pd.read_csv(directory)

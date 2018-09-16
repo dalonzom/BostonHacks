@@ -6,7 +6,7 @@ import re
 
 def map(x, in_min, in_max, out_min, out_max):
     return abs((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
-directory = '/Users/Marissa/Documents/BostonHacks/night_data_'
+directory = '/home/linaro/BostonHacks/night_data_'
 extension = ".txt"
 
 num_nights = 1
@@ -14,8 +14,8 @@ num_nights = 1
 
 data = pd.DataFrame()
 for name in range(0, num_nights):
-    app = pd.read_csv(directory+ str(0)+extension,header=None)
-    print(directory+ str(0)+extension)
+    app = pd.read_csv(directory+ str(name)+extension,header=None)
+    print(directory+ str(name)+extension)
     #print(app)
     data = data.append(app) 
 print(data)
