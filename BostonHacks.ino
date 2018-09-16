@@ -2,7 +2,6 @@
 //All code for accelerometer taken from https://github.com/Seeed-Studio/Accelerometer_MMA7660.git
 #include <Wire.h>
 #include "MMA7660.h"
-#include "pitches.h"
 MMA7660 accelemeter;
 
 //Set pin numbers
@@ -15,33 +14,34 @@ int light_array[50];
 int temperature_array[50];
 int moisture_array[50];
 int accel_array[50];
-int overallTime[50]; 
+unsigned long overallTime[50]; 
 
 
 int count = 0;
-int runtime = 0;
+unsigned long runtime = 0;
 int overallCount = 0; 
+
 void setup() {
   // put your setup code here, to run once:
-  Serial.println("Data Collection Begin");
-  accelemeter.init();  
   Serial.begin(9600); 
+  //Serial.println("waiting");
+  while(Serial.available() <= 0) {};
+  //Serial.println("found");
+  accelemeter.init();  
   pinMode(light, INPUT);
   pinMode(temp, INPUT); 
   pinMode(moisture, INPUT);
   pinMode(buzzer, OUTPUT);
   breathing_exercise(buzzer); 
-
-
 }
 
 void loop() {
-
   //set loop count
   // Take analog sensor readings
   runtime = millis(); 
   overallTime[count] = runtime; 
-  Serial.print(runtime); 
+  Serial.print(runtime);
+  Serial.print(","); 
   int light_percent = light_map(analogRead(light)); 
   Serial.print(light_percent);
   Serial.print(","); 
@@ -76,20 +76,18 @@ void loop() {
   int avg_moisture = running_avg(moisture_array,count, overallCount); 
   int avg_accel = running_avg(accel_array,count, overallCount);
   
-  if(composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100)  {
+  if(composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100 && (overallCount != 0))  {
     trigger_wakeup(buzzer);
     breathing_exercise(buzzer);
   }
   
-  delay(2000); 
+  delay(5000); 
  
   count++;
   if(count >= 50)
   {
     count = 0;
     overallCount++; 
-  }
-    
-    
+  }   
 
 }

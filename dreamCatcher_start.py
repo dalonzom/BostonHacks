@@ -3,6 +3,9 @@ import record_data
 import nightlyGraph
 import overallGraphs
 import serial
+import time
+
+ser = serial.Serial("/dev/tty96B0",9600)
 
 class Application(Frame):
     def plot_history(self):
@@ -12,10 +15,9 @@ class Application(Frame):
         nightlyGraph.nightlyGraph(1)
 
     def collect_data(self):
+        time.sleep(5)
+        ser.write('5')
 	record_data.record_data(2)
-        ser = serial.Serial("/dev/tty96B0",9600)
-        while true:
-            ser.write("1")
 
     def createWidgets(self):
 	self.data= Button(self)
