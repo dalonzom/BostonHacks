@@ -8,7 +8,7 @@ MMA7660 accelemeter;
 const int light = A0; 
 const int temp = A1; 
 const int moisture = A3; 
-const int buzzer = 4;
+const in buzzer = A2; 
 
 int light_array[50];
 int temperature_array[50];
