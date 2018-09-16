@@ -6,12 +6,12 @@ const int temp = A1;
 const int moisture = A3; 
 
 
-int light_array[500];
-int temperature_array[500];
-int moisture_array[500];
-int gx_array[500];
-int gy_array[500];
-int gz_array[500];
+int light_array[100];
+int temperature_array[100];
+int moisture_array[100];
+//int gx_array[500];
+//int gy_array[500];
+//int gz_array[500];
 
 int count = 0;
 int runtime = 0;
@@ -32,18 +32,17 @@ void setup() {
 
 void loop() {
   //set loop count
-  for(int jj = 0; jj < 500; jj++)  {
-    
-  }
   // Take analog sensor readings
   int light_percent = light_map(analogRead(light)); 
   int temperature = temp_conversion(analogRead(temp)); 
   int moisture_val = analogRead(moisture); 
-  
+  //Serial.println(temperature);
   light_array[count] = light_percent;
+  Serial.println(light_array[count]);
   temperature_array[count] = temperature;
   moisture_array[count] = moisture_val;
-  
+  Serial.println(moisture_array[count]);
+  /*
   int avg_light = running_avg(light_array,count);
   int avg_temp = running_avg(temperature_array,count);
   int avg_moisture = running_avg(moisture_array,count);
@@ -57,7 +56,7 @@ void loop() {
   Serial.print(temperature);
   Serial.print(" avg_temp: ");
   Serial.println(avg_temp);
-  
+  */
   delay(2000); 
 
   count++;
