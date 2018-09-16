@@ -13,8 +13,9 @@ class Application(Frame):
 
     def collect_data(self):
 	record_data.record_data(2)
-        ser = serial.Serial("COM1",9600)
-        ser.write("1")
+        ser = serial.Serial("/dev/tty96B0",9600)
+        while true:
+            ser.write("1")
 
     def createWidgets(self):
 	self.data= Button(self)
