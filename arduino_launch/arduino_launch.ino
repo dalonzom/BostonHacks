@@ -7,7 +7,7 @@ void setup(){
 }
 
 void loop(){ 
-  Serial.println("waiting...");
+//S  Serial(println("waiting...");
   
   if(Serial.available() > 0){   
     Serial.println("Signal Received");
