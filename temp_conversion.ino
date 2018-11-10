@@ -7,5 +7,5 @@ int temp_conversion(int raw)  {
   
   float temp = 1.0/(log(R/R0)/B+1/298.15)-273.15;
   
-  return temp;
+  return int(temp);
 }
