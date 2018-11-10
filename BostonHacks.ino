@@ -60,21 +60,14 @@ void loop() {
   int avg_light = running_avg(light_array,count);
   int avg_temp = running_avg(temperature_array,count);
   int avg_moisture = running_avg(moisture_array,count);
+  int avg_gx = running_avg(gx_array,count);
+  int avg_gy = running_avg(gy_array,count);
+  int avg_gz = running_avg(gz_array,count);
   
   delay(2000); 
 
   count++;
-  if(count >=5)
-  {
-      ofstream myfile;
-      myfile.open ("example.txt");
-      for(int i = 0; i<count; i++)
-      {
-        myfile << light_array[i] << '\n'; 
-      }
-      count=0; 
-  }
-  myfile.close()
-   
+  if(count >= 50)
+    count = 0;
 
 }
