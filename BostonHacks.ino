@@ -2,13 +2,14 @@
 //All code for accelerometer taken from https://github.com/Seeed-Studio/Accelerometer_MMA7660.git
 #include <Wire.h>
 #include "MMA7660.h"
+#include "pitches.h"
 MMA7660 accelemeter;
 
 //Set pin numbers
 const int light = A0; 
 const int temp = A1; 
 const int moisture = A3; 
-const in buzzer = A2; 
+const int buzzer = A2; 
 
 int light_array[50];
 int temperature_array[50];
@@ -29,6 +30,7 @@ void setup() {
   pinMode(light, INPUT);
   pinMode(temp, INPUT); 
   pinMode(moisture, INPUT);
+  pinMode(buzzer, OUTPUT);
 
 }
 
@@ -69,7 +71,10 @@ void loop() {
   int avg_moisture = running_avg(moisture_array,count); 
   int avg_accel = running_avg(accel_array,count);
   
-  
+  if(composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100)  {
+    trigger_wakeup(buzzer);
+    breathing_exercise(buzzer);
+  }
   
   delay(2000); 
   count++;
