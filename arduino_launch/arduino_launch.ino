@@ -7,7 +7,9 @@ void setup(){
 }
 
 void loop(){ 
-  if(Serial.available() > 0){      // if data present, blink
+  Serial.println("waiting...");
+  
+  if(Serial.available() > 0){   
     Serial.println("Signal Received");
     int BostonHacks();
     Serial.write('0');
