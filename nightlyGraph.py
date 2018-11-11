@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
-from numpy.random import rand
+
 import matplotlib.gridspec as gridspec
 import pandas as pd 
-import re
+
 
 directory = '/Users/Marissa/Documents/BostonHacks/output.txt'
 #experiment = '.dat'
