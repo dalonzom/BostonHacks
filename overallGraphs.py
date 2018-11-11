@@ -12,7 +12,7 @@ savedir = '/home/linaro/BostonHacks/plots/'
 extension = ".txt"
 
 num_nights = sys.argv[1]
-fig.suptitle('Overall Sleep Trends', fontsize=14) 
+
 
 
 data = pd.DataFrame()
@@ -60,7 +60,7 @@ ax2.plot(sleepTemp,temp, marker='s',markersize=3, color="orange")
 
 
 plt.show()
-plt.savefig(savedir+str(num_nights) + ".pdf")
+plt.savefig(savedir+str(num_nights) + "Aggregated.pdf")
 
 
 
