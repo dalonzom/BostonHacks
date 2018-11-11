@@ -36,9 +36,15 @@ void loop() {
   //set loop count
   // Take analog sensor readings
   int light_percent = light_map(analogRead(light)); 
+  Serial.print(light_percent);
+  Serial.print(","); 
   int temperature = temp_conversion(analogRead(temp)); 
+  Serial.print(temperature);
+  Serial.print(","); 
   int moisture_val = analogRead(moisture); 
-  //Serial.println(temperature);
+  Serial.print(moisture_val);
+  Serial.print(","); 
+  
   light_array[count] = light_percent;
   //Serial.println(light_array[count]);
   temperature_array[count] = temperature;
@@ -52,10 +58,15 @@ void loop() {
   accelemeter.getXYZ(&x,&y,&z);
   accelemeter.getAcceleration(&ax,&ay,&az);
   gx_array[count] = ax*100; 
-  Serial.println(gx_array[count]);
-  gy_array[count] = ay*100; 
+  Serial.print(gx_array[count]);
+  Serial.print(","); 
+  gy_array[count] = ay*100;
+  Serial.print(gy_array[count]);
+  Serial.print(",");  
   gz_array[count] = ax*100; 
-
+  Serial.print(gz_array[count]);
+  Serial.print(","); 
+  Serial.println(); 
 
   int avg_light = running_avg(light_array,count);
   int avg_temp = running_avg(temperature_array,count);
@@ -65,7 +76,6 @@ void loop() {
   int avg_gz = running_avg(gz_array,count);
   
   delay(2000); 
-
   count++;
   if(count >= 50)
     count = 0;
