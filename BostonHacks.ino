@@ -32,12 +32,11 @@ void setup() {
   pinMode(moisture, INPUT);
   pinMode(buzzer, OUTPUT);
 
-  trigger_wakeup(buzzer); 
 
 }
 
 void loop() {
-  /*
+
   //set loop count
   // Take analog sensor readings
   int light_percent = light_map(analogRead(light)); 
@@ -83,6 +82,6 @@ void loop() {
   count++;
   if(count >= 50)
     count = 0;
-    */ 
+    
 
 }
