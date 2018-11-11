@@ -81,7 +81,7 @@ void loop() {
     breathing_exercise(buzzer);
   }
   
-  delay(2000); 
+  delay(5000); 
  
   count++;
   if(count >= 50)
