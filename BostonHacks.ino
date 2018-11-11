@@ -1,4 +1,8 @@
 
+//All code for accelerometer taken from https://github.com/Seeed-Studio/Accelerometer_MMA7660.git
+#include <Wire.h>
+#include "MMA7660.h"
+MMA7660 accelemeter;
 
 //Set pin numbers
 const int light = A0; 
@@ -6,23 +10,19 @@ const int temp = A1;
 const int moisture = A3; 
 
 
-int light_array[100];
-int temperature_array[100];
-int moisture_array[100];
-//int gx_array[500];
-//int gy_array[500];
-//int gz_array[500];
+int light_array[50];
+int temperature_array[50];
+int moisture_array[50];
+int gx_array[50];
+int gy_array[50];
+int gz_array[50];
 
 int count = 0;
 int runtime = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  /*
-  pinMode(tempPerson, INPUT); 
-  pinMode(tempRoom, INPUT);
-  pinMode(accelerometer, INPUT);
-  */ 
+  accelemeter.init();  
   Serial.begin(9600); 
   pinMode(light, INPUT);
   pinMode(temp, INPUT); 
@@ -42,6 +42,19 @@ void loop() {
   temperature_array[count] = temperature;
   moisture_array[count] = moisture_val;
   Serial.println(moisture_array[count]);
+
+  int8_t x;
+  int8_t y;
+  int8_t z;
+  float ax,ay,az;
+  accelemeter.getXYZ(&x,&y,&z);
+  accelemeter.getAcceleration(&ax,&ay,&az);
+  gx_array[count] = ax; 
+  Serial.println(gx_array[count]);
+  gy_array[count] = ay; 
+  gz_array[count] = ax; 
+  
+  
   /*
   int avg_light = running_avg(light_array,count);
   int avg_temp = running_avg(temperature_array,count);
