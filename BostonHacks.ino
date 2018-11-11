@@ -1,6 +1,7 @@
 
 //All code for accelerometer taken from https://github.com/Seeed-Studio/Accelerometer_MMA7660.git
 #include <Wire.h>
+#include <fstream>
 #include "MMA7660.h"
 MMA7660 accelemeter;
 
@@ -22,6 +23,7 @@ int runtime = 0;
 
 void setup() {
   // put your setup code here, to run once:
+  Bridge.begin();
   accelemeter.init();  
   Serial.begin(9600); 
   pinMode(light, INPUT);
@@ -38,10 +40,10 @@ void loop() {
   int moisture_val = analogRead(moisture); 
   //Serial.println(temperature);
   light_array[count] = light_percent;
-  Serial.println(light_array[count]);
+  //Serial.println(light_array[count]);
   temperature_array[count] = temperature;
   moisture_array[count] = moisture_val;
-  Serial.println(moisture_array[count]);
+ // Serial.println(moisture_array[count]);
 
   int8_t x;
   int8_t y;
@@ -53,27 +55,26 @@ void loop() {
   Serial.println(gx_array[count]);
   gy_array[count] = ay*100; 
   gz_array[count] = ax*100; 
-  
-  
-  /*
+
+
   int avg_light = running_avg(light_array,count);
   int avg_temp = running_avg(temperature_array,count);
   int avg_moisture = running_avg(moisture_array,count);
   
-  //Print to serial port
-  runtime = millis(); 
-  Serial.println("Time"); 
-  Serial.println(runtime); 
-  
-  Serial.print("temp: ");
-  Serial.print(temperature);
-  Serial.print(" avg_temp: ");
-  Serial.println(avg_temp);
-  */
   delay(2000); 
 
   count++;
-  if(count >=50)
-    count=0; 
+  if(count >=5)
+  {
+      ofstream myfile;
+      myfile.open ("example.txt");
+      for(int i = 0; i<count; i++)
+      {
+        myfile << light_array[i] << '\n'; 
+      }
+      count=0; 
+  }
+  myfile.close()
+   
 
 }
