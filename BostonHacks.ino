@@ -15,11 +15,11 @@ int light_array[50];
 int temperature_array[50];
 int moisture_array[50];
 int accel_array[50];
-int overallTime[50]; 
+unsigned long overallTime[50]; 
 
 
 int count = 0;
-int runtime = 0;
+unsigned long runtime = 0;
 int overallCount = 0; 
 void setup() {
   // put your setup code here, to run once:
@@ -41,6 +41,7 @@ void loop() {
   runtime = millis(); 
   overallTime[count] = runtime; 
   Serial.print(runtime); 
+  Serial.print(","); 
   int light_percent = light_map(analogRead(light)); 
   Serial.print(light_percent);
   Serial.print(","); 
@@ -75,7 +76,7 @@ void loop() {
   int avg_moisture = running_avg(moisture_array,count, overallCount); 
   int avg_accel = running_avg(accel_array,count, overallCount);
   
-  if(composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100)  {
+  if((composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100) && (overallCount != 0 ))  {
     trigger_wakeup(buzzer);
     breathing_exercise(buzzer);
   }
