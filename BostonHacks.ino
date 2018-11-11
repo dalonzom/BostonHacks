@@ -1,7 +1,6 @@
 
 //All code for accelerometer taken from https://github.com/Seeed-Studio/Accelerometer_MMA7660.git
 #include <Wire.h>
-#include <fstream>
 #include "MMA7660.h"
 MMA7660 accelemeter;
 
@@ -23,7 +22,6 @@ int runtime = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  Bridge.begin();
   accelemeter.init();  
   Serial.begin(9600); 
   pinMode(light, INPUT);
