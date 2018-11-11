@@ -15,6 +15,7 @@ int light_array[50];
 int temperature_array[50];
 int moisture_array[50];
 int accel_array[50];
+int overallTime[50]; 
 
 
 int count = 0;
@@ -37,6 +38,9 @@ void loop() {
 
   //set loop count
   // Take analog sensor readings
+  runtime = millis(); 
+  overallTime[count] = runtime; 
+  Serial.print(runtime); 
   int light_percent = light_map(analogRead(light)); 
   Serial.print(light_percent);
   Serial.print(","); 
@@ -77,6 +81,7 @@ void loop() {
   }
   
   delay(2000); 
+ 
   count++;
   if(count >= 50)
   {
