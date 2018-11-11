@@ -49,10 +49,10 @@ void loop() {
   float ax,ay,az;
   accelemeter.getXYZ(&x,&y,&z);
   accelemeter.getAcceleration(&ax,&ay,&az);
-  gx_array[count] = ax; 
+  gx_array[count] = ax*100; 
   Serial.println(gx_array[count]);
-  gy_array[count] = ay; 
-  gz_array[count] = ax; 
+  gy_array[count] = ay*100; 
+  gz_array[count] = ax*100; 
   
   
   /*
@@ -73,5 +73,7 @@ void loop() {
   delay(2000); 
 
   count++;
+  if(count >=50)
+    count=0; 
 
 }
