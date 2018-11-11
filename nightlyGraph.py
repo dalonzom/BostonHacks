@@ -46,11 +46,11 @@ ax2.plot(time, temp, marker='s',markersize=3, color="orange")
 
 ax3 = fig.add_subplot(gs[2, :])     
 ax3.set_title("Light")
-ax3.set_ylabel("Light (lumens)")
+ax3.set_ylabel("Light (percentile)")
 ax3.set_xlabel("Time (min)")
 #ax1.ticklabel_format(axis='y', label='scientific',scilimits=(0,0))
 ax3.plot(time, light, marker='s',markersize=3, color="purple")
 
 plt.show()
 
-plt.savedir(savedir+str(num_nights) + ".pdf")
+plt.savefig(savedir+str(num_nights) + ".pdf")

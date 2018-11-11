@@ -60,7 +60,7 @@ ax2.plot(sleepTemp,temp, marker='s',markersize=3, color="orange")
 
 
 plt.show()
-plt.savedir(savedir+str(num_nights) + ".pdf")
+plt.savefig(savedir+str(num_nights) + ".pdf")
 
 
 
