@@ -6,15 +6,12 @@ import serial
 
 class Application(Frame):
     def plot_history(self):
-        print "hi there, everyone!"
         overallGraphs.overallGraphs(1)
 
     def plot_recent(self):
-        print "Ugh"
         nightlyGraph.nightlyGraph(1)
 
     def collect_data(self):
-        print "Woo"
 	record_data.record_data(2)
         ser = serial.Serial("COM1",9600)
         ser.write("1")
