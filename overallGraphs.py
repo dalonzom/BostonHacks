@@ -11,7 +11,7 @@ directory = '/home/linaro/BostonHacks/data/night_data_'
 savedir = '/home/linaro/BostonHacks/plots/'
 extension = ".txt"
 
-num_nights = sys.argv[1]
+num_nights = int(sys.argv[1])
 
 
 
