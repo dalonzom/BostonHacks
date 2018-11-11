@@ -1,22 +1,24 @@
 import matplotlib.pyplot as plt
-
 import matplotlib.gridspec as gridspec
 import pandas as pd 
 
+def map(x, in_min, in_max, out_min, out_max):
+    return abs((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+
+
 
 directory = '/Users/Marissa/Documents/BostonHacks/output.txt'
-#experiment = '.dat'
 
-#savedir = '/Users/Marissa/Documents/Research/powercap_exps/plots/exp1/'
 
 app = pd.read_csv(directory)
-#print(app)
 
-light = app.iloc[:,0]; 
-temp = app.iloc[:,1];
-time = list(range(0, len(light)))
- 
-acceleration = app.iloc[:,2]
+time = (app.iloc[:,0]*.001)/60; 
+light = app.iloc[:,1]; 
+temp = app.iloc[:,2];
+moisture = app.iloc[:,3]
+acceleration = app.iloc[:,4]
+sleepRate = moisture*.3 + acceleration*.7
+sleepRate = [map(i,0,200, 100,0) for i in sleepRate]
 
  
 
@@ -26,16 +28,16 @@ fig = plt.figure(figsize=(12, 12))
 fig.suptitle('Sleep for Tonight', fontsize=14)
 
 ax1 = fig.add_subplot(gs[0, :])      
-ax1.set_title("Breaths")
-ax1.set_ylabel("Sleep (Breaths/Min)")
+ax1.set_title("Sleep Quality")
+ax1.set_ylabel("Sleep Quality")
 x_axis = ax1.xaxis
 x_axis.set_visible(False)
-ax1.plot(time, acceleration, marker='s',markersize=3)
+ax1.plot(time, sleepRate, marker='s',markersize=3)
 
 
 ax2 = fig.add_subplot(gs[1, :])     
 ax2.set_title("Temperature")
-ax2.set_ylabel("Temperature (F)")
+ax2.set_ylabel("Temperature (C)")
 x_axis = ax2.xaxis
 x_axis.set_visible(False)
 ax2.plot(time, temp, marker='s',markersize=3, color="orange")
@@ -43,7 +45,7 @@ ax2.plot(time, temp, marker='s',markersize=3, color="orange")
 ax3 = fig.add_subplot(gs[2, :])     
 ax3.set_title("Light")
 ax3.set_ylabel("Light (lumens)")
-ax3.set_xlabel("Time (ms)")
+ax3.set_xlabel("Time (min)")
 #ax1.ticklabel_format(axis='y', label='scientific',scilimits=(0,0))
 ax3.plot(time, light, marker='s',markersize=3, color="purple")
 
