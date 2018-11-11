@@ -10,13 +10,14 @@ const int temp = A1;
 const int moisture = A3; 
 const in buzzer = A2; 
 
-
 int light_array[50];
 int temperature_array[50];
 int moisture_array[50];
-int gx_array[50];
+int accel_array[50];
+/*int gx_array[50];
 int gy_array[50];
 int gz_array[50];
+*/
 
 int count = 0;
 int runtime = 0;
@@ -56,23 +57,19 @@ void loop() {
   float ax,ay,az;
   accelemeter.getXYZ(&x,&y,&z);
   accelemeter.getAcceleration(&ax,&ay,&az);
-  gx_array[count] = ax*100; 
-  Serial.print(gx_array[count]);
-  Serial.print(","); 
-  gy_array[count] = ay*100;
-  Serial.print(gy_array[count]);
-  Serial.print(",");  
-  gz_array[count] = ax*100; 
-  Serial.print(gz_array[count]);
-  Serial.print(","); 
-  Serial.println(); 
-
+  ax = 100*ax; ay = 100*ay; az = 100*az;
+  
+  int composite_accel = sqrt(ax*ax+ay*ay+az*az);
+  accel_array[count] = composite_accel;
+  Serial.print(composite_accel);
+  Serial.println("");
+  
   int avg_light = running_avg(light_array,count);
   int avg_temp = running_avg(temperature_array,count);
-  int avg_moisture = running_avg(moisture_array,count);
-  int avg_gx = running_avg(gx_array,count);
-  int avg_gy = running_avg(gy_array,count);
-  int avg_gz = running_avg(gz_array,count);
+  int avg_moisture = running_avg(moisture_array,count); 
+  int avg_accel = running_avg(accel_array,count);
+  
+  
   
   delay(2000); 
   count++;
