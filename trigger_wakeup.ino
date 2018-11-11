@@ -1,7 +1,7 @@
 void trigger_wakeup(int buzzer)  {
-  int notes[] = {NOTE_C3, NOTE_D3, NOTE_E3, NOTE_F3, NOTE_G3, NOTE_A3, NOTE_B3, NOTE_C4};
+  int notes[] = { 1915, 1700, 1519, 1432, 1275, 1136, 1014, 956 };
  for(int aa = 0; aa < 8; aa ++)  {
-   tone(buzzer,notes[aa],2000);
+   tone(buzzer,notes[aa],1000);
    delay(2000);
  }
 }
