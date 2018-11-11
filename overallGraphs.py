@@ -3,20 +3,22 @@ from numpy.random import rand
 import matplotlib.gridspec as gridspec
 import pandas as pd 
 import re
+import sys
 
 def map(x, in_min, in_max, out_min, out_max):
     return abs((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
-directory = '/home/linaro/BostonHacks/night_data_'
+directory = '/home/linaro/BostonHacks/data/night_data_'
+savedir = '/home/linaro/BostonHacks/plots/'
 extension = ".txt"
 
-num_nights = 1
-#savedir = '/Users/Marissa/Documents/Research/powercap_exps/plots/exp1/'
+num_nights = sys.argv[1]
+fig.suptitle('Overall Sleep Trends', fontsize=14) 
+
 
 data = pd.DataFrame()
 for name in range(0, num_nights):
     app = pd.read_csv(directory+ str(name)+extension,header=None)
     print(directory+ str(name)+extension)
-    #print(app)
     data = data.append(app) 
 print(data)
 
@@ -44,20 +46,21 @@ fig.suptitle('Overall Sleep Patterns', fontsize=14)
 
 ax1 = fig.add_subplot(gs[0, :])      
 ax1.set_title("Light")
-#ax1.set_ylabel("Sleep (Breaths/Min)")
-ax1.set_ylabel("Light(lumens)")
+ax1.set_ylabel("Light(percentile)")
+x_axis = ax1.xaxis
+x_axis.set_visible(False)
 ax1.plot(sleepLight, light, marker='s',markersize=3)
 
 
 ax2 = fig.add_subplot(gs[1, :])     
 ax2.set_title("Temperature")
-#ax2.set_ylabel("Sleep (Breaths/Min)")
-ax2.set_ylabel("Temperature(F)")
+ax2.set_ylabel("Temperature(C)")
 ax2.plot(sleepTemp,temp, marker='s',markersize=3, color="orange")
 
 
 
 plt.show()
+plt.savedir(savedir+str(num_nights) + ".pdf")
 
 
 

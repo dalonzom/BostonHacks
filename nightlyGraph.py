@@ -1,16 +1,18 @@
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import pandas as pd 
+import sys 
 
 def map(x, in_min, in_max, out_min, out_max):
     return abs((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
 
 
 
-directory = '/home/linaro/BostonHacks/night_data_1.txt' 
+directory = '/home/linaro/BostonHacks/data/night_data_'+sys.argv[1]
+extension = '.txt' 
+savedir = '/home/linaro/BostonHacks/plots/'
 
-
-app = pd.read_csv(directory)
+app = pd.read_csv(directory+extension)
 
 time = (app.iloc[:,0]*.001)/60; 
 light = app.iloc[:,1]; 
@@ -50,3 +52,5 @@ ax3.set_xlabel("Time (min)")
 ax3.plot(time, light, marker='s',markersize=3, color="purple")
 
 plt.show()
+
+plt.savedir(savedir+str(num_nights) + ".pdf")
