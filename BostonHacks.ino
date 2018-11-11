@@ -76,7 +76,7 @@ void loop() {
   int avg_moisture = running_avg(moisture_array,count, overallCount); 
   int avg_accel = running_avg(accel_array,count, overallCount);
   
-  if(composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100 && (overallCount != 0))  {
+  if(abs(composite_accel - avg_accel) > 14 || moisture_val - avg_moisture > 80 && (overallCount != 0 || count > 10))  {
     trigger_wakeup(buzzer);
     breathing_exercise(buzzer);
   }
