@@ -10,7 +10,7 @@ def map(x, in_min, in_max, out_min, out_max):
 
 directory = '/home/linaro/BostonHacks/data/night_data_'+sys.argv[1]
 extension = '.txt' 
-savedir = '/home/linaro/BostonHacks/plots/'
+savedir = '/home/linaro/BostonHacks/plots/'+sys.argv[1]
 
 app = pd.read_csv(directory+extension)
 
@@ -53,4 +53,4 @@ ax3.plot(time, light, marker='s',markersize=3, color="purple")
 
 plt.show()
 
-plt.savefig(savedir+str(num_nights) + ".pdf")
+plt.savefig(savedir+ ".pdf")
