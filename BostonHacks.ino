@@ -15,14 +15,11 @@ int light_array[50];
 int temperature_array[50];
 int moisture_array[50];
 int accel_array[50];
-/*int gx_array[50];
-int gy_array[50];
-int gz_array[50];
-*/
+
 
 int count = 0;
 int runtime = 0;
-
+int overallCount = 0; 
 void setup() {
   // put your setup code here, to run once:
   accelemeter.init();  
@@ -31,6 +28,7 @@ void setup() {
   pinMode(temp, INPUT); 
   pinMode(moisture, INPUT);
   pinMode(buzzer, OUTPUT);
+  breathing_exercise(buzzer); 
 
 
 }
@@ -68,10 +66,10 @@ void loop() {
   Serial.print(composite_accel);
   Serial.println("");
   
-  int avg_light = running_avg(light_array,count);
-  int avg_temp = running_avg(temperature_array,count);
-  int avg_moisture = running_avg(moisture_array,count); 
-  int avg_accel = running_avg(accel_array,count);
+  int avg_light = running_avg(light_array,count, overallCount);
+  int avg_temp = running_avg(temperature_array,count, overallCount);
+  int avg_moisture = running_avg(moisture_array,count, overallCount); 
+  int avg_accel = running_avg(accel_array,count, overallCount);
   
   if(composite_accel - avg_accel > 30 || moisture_val - avg_moisture > 100)  {
     trigger_wakeup(buzzer);
@@ -81,7 +79,11 @@ void loop() {
   delay(2000); 
   count++;
   if(count >= 50)
+  {
     count = 0;
+    overallCount++; 
+  }
+    
     
 
 }
